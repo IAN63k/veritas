@@ -48,7 +48,7 @@ export default function LoginPage() {
                 router.push('/')
             }
         } catch (err) {
-            setError('An unexpected error occurred')
+            setError('Ocurrió un error inesperado. Por favor, intenta de nuevo.')
             setLoading(false)
         }
     }
@@ -102,8 +102,8 @@ export default function LoginPage() {
                         </div>
                     </CardContent>
 
-                    <CardFooter className="flex flex-col space-y-4">
-                        <Button type="submit" className="w-full" disabled={loading}>
+                    <CardFooter className="flex flex-col space-y-4 mt-5">
+                        <Button type="submit" className="w-52" disabled={loading}>
                             {loading ? (
                                 <>
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />

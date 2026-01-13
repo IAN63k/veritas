@@ -74,7 +74,7 @@ export default function RegisterPage() {
                 router.push('/student/my-courses')
             }
         } catch (err) {
-            setError('Ocurrió un error inesperado')
+            setError('Ocurrió un error inesperado, por favor, intenta de nuevo.')
             setLoading(false)
         }
     }
@@ -84,7 +84,7 @@ export default function RegisterPage() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 p-4">
+        <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-slate-50 to-slate-100 p-4">
             <Card className="w-full max-w-md">
                 <CardHeader className="space-y-1 text-center">
                     <div className="flex justify-center mb-4">
@@ -214,8 +214,8 @@ export default function RegisterPage() {
                         </div>
                     </CardContent>
 
-                    <CardFooter className="flex flex-col space-y-4">
-                        <Button type="submit" className="w-full" disabled={loading}>
+                    <CardFooter className="flex flex-col space-y-4 mt-5">
+                        <Button type="submit" className="w-52" disabled={loading}>
                             {loading ? (
                                 <>
                                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
