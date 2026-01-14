@@ -66,6 +66,23 @@ export async function unenrollStudent(enrollmentId: string, courseId: string) {
     return { error: null }
 }
 
+export async function bulkUnenrollStudents(enrollmentIds: string[], courseId: string) {
+    const supabase = await createClient()
+
+    const { error } = await supabase
+        .from('enrollments')
+        .delete()
+        .in('id', enrollmentIds)
+
+    if (error) {
+        return { error: error.message, count: 0 }
+    }
+
+    revalidatePath(`/teacher/courses/${courseId}/students`)
+    revalidatePath('/student/my-courses')
+    return { error: null, count: enrollmentIds.length }
+}
+
 export async function getEnrolledStudents(courseId: string) {
     const supabase = await createClient()
 
