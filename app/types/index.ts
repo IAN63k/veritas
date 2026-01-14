@@ -73,3 +73,45 @@ export interface SuspiciousEvent {
   timestamp: string
   metadata: any | null
 }
+
+// Tipos para Enrollments
+export interface Enrollment {
+  id: string
+  student_id: string
+  course_id: string
+  enrolled_at: string
+}
+
+export interface EnrollmentWithCourse {
+  id: string
+  enrolled_at: string
+  courses: {
+    id: string
+    name: string
+    code: string
+    period: string
+    description: string | null
+    teacher_id: string
+    teachers: {
+      name: string
+    }
+  }
+}
+
+export interface BulkEnrollmentStudent {
+  name: string
+  email: string
+  student_code: string
+}
+
+export interface BulkEnrollmentResult {
+  success: number
+  failed: number
+  details: {
+    name: string
+    email: string
+    student_code: string
+    status: 'created' | 'exists' | 'enrolled' | 'error'
+    message: string
+  }[]
+}
