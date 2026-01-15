@@ -142,7 +142,7 @@ export function EnrolledStudentsTable({
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead className="w-[50px]">
+                            <TableHead className="w-12.5">
                                 <Checkbox
                                     checked={selectedIds.size === enrollments.length && enrollments.length > 0}
                                     onCheckedChange={toggleSelectAll}
