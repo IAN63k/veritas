@@ -117,9 +117,9 @@ export async function getStudentCourses() {
     return { data: null, error: 'No autenticado' }
   }
 
-  // 🔥 Llamar a la función RPC que hace el JOIN en SQL
-  const { data: rows, error } = await supabase
-    .rpc('get_student_courses', { user_id: user.id } as any) as { data: any[] | null; error: any }
+  // Llamar a la función RPC actualizada
+  const { data: rows, error } = (await supabase
+    .rpc('get_student_courses', { user_id: user.id } as any)) as { data: any[] | null; error: any }
 
   if (error) {
     console.error('Error en get_student_courses:', error)
@@ -130,7 +130,7 @@ export async function getStudentCourses() {
     return { data: [], error: null }
   }
 
-  // Transformar al formato esperado por el componente
+  // Transformar al formato esperado
   const result = rows.map((row: any) => ({
     id: row.enrollment_id,
     enrolled_at: row.enrolled_at,
@@ -142,7 +142,10 @@ export async function getStudentCourses() {
       description: row.course_description,
       teachers: {
         name: row.teacher_name
-      }
+      },
+      // Agregar conteos
+      evaluations_count: row.evaluations_count,
+      pending_evaluations_count: row.pending_evaluations_count
     }
   }))
 
