@@ -72,6 +72,19 @@ export function BulkEnrollmentDialog({
         router.refresh()
     }
 
+    const handleEditFailed = () => {
+        if (!result) return
+
+        // Filtrar solo los estudiantes con error
+        const failedStudents = result.details
+            .filter((detail: any) => detail.status === 'error')
+            .map((detail: any) => `${detail.name},${detail.email},${detail.student_code}`)
+            .join('\n')
+
+        setCsvData(failedStudents)
+        setResult(null)
+    }
+
     const getStatusIcon = (status: string) => {
         switch (status) {
             case 'created':
@@ -184,12 +197,22 @@ export function BulkEnrollmentDialog({
                                 >
                                     Nuevo Ingreso
                                 </Button>
-                                <Button
-                                    onClick={() => onOpenChange(false)}
-                                    className="flex-1"
-                                >
-                                    Cerrar
-                                </Button>
+                                {result.failed > 0 ? (
+                                    <Button
+                                        onClick={handleEditFailed}
+                                        className="flex-1"
+                                        variant="destructive"
+                                    >
+                                        Editar Fallidos ({result.failed})
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        onClick={() => onOpenChange(false)}
+                                        className="flex-1"
+                                    >
+                                        Cerrar
+                                    </Button>
+                                )}
                             </div>
                         </div>
                     )}
