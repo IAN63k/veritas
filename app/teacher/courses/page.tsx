@@ -57,7 +57,7 @@ function CoursesListSkeleton() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3, 4, 5, 6].map((i) => (
                 <div key={i} className="space-y-3">
-                    <Skeleton className="h-[200px] w-full rounded-lg" />
+                    <Skeleton className="h-50 w-full rounded-lg" />
                 </div>
             ))}
         </div>
