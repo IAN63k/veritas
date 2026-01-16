@@ -115,3 +115,36 @@ export interface BulkEnrollmentResult {
     message: string
   }[]
 }
+
+// Tipos de contenido para diferentes tipos de preguntas
+export interface MultipleChoiceContent {
+  question: string
+  options: {
+    id: string
+    text: string
+    is_correct: boolean
+  }[]
+  explanation?: string
+}
+
+export interface OpenQuestionContent {
+  question: string
+  expected_keywords?: string[]
+  max_length?: number
+}
+
+export interface CodeQuestionContent {
+  question: string
+  language: string
+  starter_code?: string
+  test_cases?: {
+    input: string
+    expected_output: string
+  }[]
+}
+
+export interface TrueFalseContent {
+  statement: string
+  correct_answer: boolean
+  explanation?: string
+}
