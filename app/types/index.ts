@@ -73,3 +73,78 @@ export interface SuspiciousEvent {
   timestamp: string
   metadata: any | null
 }
+
+// Tipos para Enrollments
+export interface Enrollment {
+  id: string
+  student_id: string
+  course_id: string
+  enrolled_at: string
+}
+
+export interface EnrollmentWithCourse {
+  id: string
+  enrolled_at: string
+  courses: {
+    id: string
+    name: string
+    code: string
+    period: string
+    description: string | null
+    teacher_id: string
+    teachers: {
+      name: string
+    }
+  }
+}
+
+export interface BulkEnrollmentStudent {
+  name: string
+  email: string
+  student_code: string
+}
+
+export interface BulkEnrollmentResult {
+  success: number
+  failed: number
+  details: {
+    name: string
+    email: string
+    student_code: string
+    status: 'created' | 'exists' | 'enrolled' | 'error'
+    message: string
+  }[]
+}
+
+// Tipos de contenido para diferentes tipos de preguntas
+export interface MultipleChoiceContent {
+  question: string
+  options: {
+    id: string
+    text: string
+    is_correct: boolean
+  }[]
+  explanation?: string
+}
+
+export interface OpenQuestionContent {
+  question: string
+  expected_keywords?: string[]
+  max_length?: number
+}
+
+export interface CodeQuestionContent {
+  question: string
+  language: string
+  starter_code?: string
+  test_cases?: {
+    input: string
+    expected_output: string
+  }[]
+}
+
+export interface TrueFalseContent {
+  statement: string
+  correct_answer: boolean
+  explanation?: string
+}
