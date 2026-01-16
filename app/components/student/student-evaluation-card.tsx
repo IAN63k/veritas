@@ -53,14 +53,17 @@ export function StudentEvaluationCard({ evaluation }: StudentEvaluationCardProps
             }
         }
 
-        // Completada (todos los intentos usados)
-        if (student_status.attempts_count >= evaluation.max_attempts) {
+        // Completada (todos los intentos usados y NO hay uno en progreso)
+        if (
+            !student_status.has_in_progress &&
+            student_status.attempts_count >= evaluation.max_attempts
+        ) {
             return {
-                badge: <Badge variant="secondary">Completada</Badge>,
-                icon: <CheckCircle2 className="h-5 w-5 text-green-500" />,
-                message: `Has usado todos tus intentos (${student_status.attempts_count}/${evaluation.max_attempts}).`,
+                badge: <Badge variant="secondary">Sin Intentos</Badge>,
+                icon: <XCircle className="h-5 w-5 text-muted-foreground" />,
+                message: `Has agotado todos tus intentos (${student_status.attempts_count}/${evaluation.max_attempts}).`,
                 canStart: false,
-                buttonText: 'Ver Resultados',
+                buttonText: 'Sin Intentos',
                 buttonVariant: 'outline' as const,
             }
         }
