@@ -65,11 +65,11 @@ async function CoursesList() {
                                 <div className="flex gap-4 text-sm text-muted-foreground">
                                     <div className="flex items-center gap-2">
                                         <FileText className="h-4 w-4" />
-                                        <span>0 evaluaciones</span>
+                                        <span>{course.evaluations_count || 0} evaluaciones</span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <Clock className="h-4 w-4" />
-                                        <span>0 pendientes</span>
+                                        <span>{course.pending_evaluations_count || 0} pendientes</span>
                                     </div>
                                 </div>
                                 <Button variant="outline" className="w-full" asChild>
