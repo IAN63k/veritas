@@ -14,9 +14,10 @@ export const dynamic = 'force-dynamic'
 export default async function CourseDetailPage({
     params,
 }: {
-    params: { id: string }
+    params: Promise<{ id: string }>
 }) {
-    const { data: course, error } = await getCourse(params.id)
+    const { id } = await params
+    const { data: course, error } = await getCourse(id)
 
     if (error || !course) {
         notFound()
