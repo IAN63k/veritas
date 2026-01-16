@@ -120,3 +120,26 @@ export async function getSuspiciousEvents(attemptId: string) {
 
     return { data, error: null }
 }
+
+export async function getEvaluationAttempts(evaluationId: string) {
+    const supabase = await createClient()
+
+    const { data, error } = await supabase
+        .from('evaluation_attempts')
+        .select(`
+      *,
+      students (
+        name,
+        email,
+        student_code
+      )
+    `)
+        .eq('evaluation_id', evaluationId)
+        .order('created_at', { ascending: false })
+
+    if (error) {
+        return { data: null, error: error.message }
+    }
+
+    return { data, error: null }
+}
